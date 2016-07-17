@@ -39,6 +39,8 @@ curl -d{} http://localhost:8000/refresh
 
 ```
 git clone git@github.com:joshlong/bootiful-microservices-config.git ~/Desktop/config
+git clone git@github.com:stgctkm/microservice-with-spring-boot-config.git
+https://github.com/stgctkm/microservice-with-spring-boot-config
 ```
 
 configration information

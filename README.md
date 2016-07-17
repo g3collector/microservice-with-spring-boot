@@ -115,6 +115,11 @@ http://localhost:9999/reservations/names
 
 reservation-service stop downstream service
 post
+```
+curl -X POST -H "Content-Type: application/json; charser=UTF-8" -H "Cache-Control: no-cache" -H "Postman-Token: 206988c3-4db1-f3a0-5c28-0ac5fee9eb68" -d '{
+"reservationName":"Dr Pollack"
+}' "http://localhost:9999/reservations"
+```
 post
 
 restart reservation-service

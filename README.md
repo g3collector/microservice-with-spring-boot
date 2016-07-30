@@ -144,3 +144,40 @@ http://localhost:9999/hystrix.stream
 http://localhost:9411/
 
 Sleuth
+
+
+## auth-service
+
+```
+curl -X POST -vu acme:acmesecret http://localhost:9191/uaa/oauth/token -H "Accept: application/json" -d "password=spring&username=jlong&grant_type=password&scope=openid&client_secret=acmesecret&client_id=acme"
+*   Trying ::1...
+* Connected to localhost (::1) port 9191 (#0)
+* Server auth using Basic with user 'acme'
+> POST /uaa/oauth/token HTTP/1.1
+> Host: localhost:9191
+> Authorization: Basic YWNtZTphY21lc2VjcmV0
+> User-Agent: curl/7.43.0
+> Accept: application/json
+> Content-Length: 103
+> Content-Type: application/x-www-form-urlencoded
+>
+* upload completely sent off: 103 out of 103 bytes
+< HTTP/1.1 200
+< X-Application-Context: auth-service:9191
+< Cache-Control: no-store
+< Pragma: no-cache
+< X-Content-Type-Options: nosniff
+< X-XSS-Protection: 1; mode=block
+< X-Frame-Options: DENY
+< Content-Type: application/json;charset=UTF-8
+< Transfer-Encoding: chunked
+< Date: Sat, 30 Jul 2016 14:27:00 GMT
+<
+* Connection #0 to host localhost left intact
+{"access_token":"ea775aeb-cdc9-400c-b841-2bf77e42eaa8","token_type":"bearer","refresh_token":"6b966b02-73e8-4628-8b45-1d3ed0983fe5","expires_in":42598,"scope":"openid"}
+```
+
+```
+curl http://localhost:9999/reservations/names -H "Authorization: Bearer ea775aeb-cdc9-400c-b841-2bf77e42eaa8"
+["takuma","michiyo","fumiyuki","yousuke"]
+```

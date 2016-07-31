@@ -181,3 +181,27 @@ curl -X POST -vu acme:acmesecret http://localhost:9191/uaa/oauth/token -H "Accep
 curl http://localhost:9999/reservations/names -H "Authorization: Bearer ea775aeb-cdc9-400c-b841-2bf77e42eaa8"
 ["takuma","michiyo","fumiyuki","yousuke"]
 ```
+
+
+# To the Cloud! (Cloud Foundry)
+```
+$ ./gradlew config-server:clean config-server:build
+$ cd config-server
+$ cf push
+# deployしたappをserviceとして登録 cf app で url を調べる
+$ cf cups config-service -p '{"uri":"http://config-service-unprofane-unsafeness.cfapps.io}'
+```
+
+```
+$ ./gradlew eureka-server:clean eureka-server:bootRepackage
+$ cd eureka-server
+$ cf push
+```
+
+```
+$ ./gradlew reservation-service:clean reservation-service:bootRepackage
+$ cd reservation-service
+$ cf cups eureka-service -p '{"uri":"http://eureka-service-pluckiest-loneness.cfapps.io"}'
+$ cf push
+```
+
